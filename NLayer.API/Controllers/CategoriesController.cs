@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
+﻿using Microsoft.AspNetCore.Mvc;
+using NLayer.API.Filters;
 using NLayer.core.Services;
 
 namespace NLayer.API.Controllers
 {
     //[Route("api/[controller]")]
     //[ApiController]
+    //[ValidateFilterAttribute] bu şekilde yaparsak tüm endpointlere yerleştirmem gerekecek.Zor.Global ise program.cs'te yap. 
     public class CategoriesController :CustomBaseController
     {
         private readonly ICategoryService _categoryService;

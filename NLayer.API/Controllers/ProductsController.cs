@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NLayer.API.Filters;
 using NLayer.core;
 using NLayer.core.DTOs;
 using NLayer.core.Services;
@@ -42,14 +43,19 @@ namespace NLayer.API.Controllers
                 // return Ok(CustomResponseDto<List<ProductDto>>.Success(200,productsDtos));
                 return CreateActionResult(CustomResponseDto<List<ProductDto>>.Success(200, productsDtos));
             }
+        [ServiceFilter(typeof(NotFoundFilter<Product>))]
             // GET/api/products/5
             [HttpGet("{id}")]
             public async Task<IActionResult> GetById(int id)
             {
                 var product = await _service.GetByIdAsync(id);
-                var productsDto = _mapper.Map<ProductDto>(product);
+            var productsDto = _mapper.Map<ProductDto>(product);
+            return CreateActionResult(CustomResponseDto<ProductDto>.Success(200, productsDto));
+            //}
+
+                //var productsDto = _mapper.Map<ProductDto>(product);
                 // return Ok(CustomResponseDto<List<ProductDto>>.Success(200,productsDtos));
-                return CreateActionResult(CustomResponseDto<ProductDto>.Success(200, productsDto));
+               
             }
 
             [HttpPost]
@@ -75,6 +81,7 @@ namespace NLayer.API.Controllers
             public async Task<IActionResult> Remove(int id)
             {
                 var product = await _service.GetByIdAsync(id);
+
                 await _service.RemoveAsync(product);
 
                 // return Ok(CustomResponseDto<List<ProductDto>>.Success(200,productsDtos));
