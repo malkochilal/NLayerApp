@@ -5,6 +5,7 @@ using NLayer.API.Filters;
 using NLayer.core;
 using NLayer.core.DTOs;
 using NLayer.core.Services;
+using System.Collections.Generic;
 
 namespace NLayer.API.Controllers
 {
@@ -26,9 +27,10 @@ namespace NLayer.API.Controllers
             [HttpGet("[action]")]
             public async Task<IActionResult> GetProductWithCategory()
             {
-                return CreateActionResult(await _service.GetProductsWithCategory());
-            //return CreateActionResult(await productService.GetProductsWithCategory());
-        }
+                List<ProductWithCategoryDto> list = await _service.GetProductsWithCategory();
+                return CreateActionResult(CustomResponseDto<List<ProductWithCategoryDto>>.Success(200,list));
+                //return CreateActionResult(await productService.GetProductsWithCategory());
+             }
 
 
 

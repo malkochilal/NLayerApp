@@ -6,17 +6,11 @@ using Microsoft.EntityFrameworkCore;
 using NLayer.API.Filters;
 using NLayer.API.Middlewares;
 using NLayer.API.Modules;
-using NLayer.core.Repositories;
-using NLayer.core.Services;
-using NLayer.core.UnitOfWorks;
 using NLayer.Repository;
-using NLayer.Repository.Repositories;
-using NLayer.Repository.UnitOfWorks;
 using NLayer.Service.Mapping;
-using NLayer.Service.Services;
 using NLayer.Service.Validations;
 using System.Reflection;
- 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
